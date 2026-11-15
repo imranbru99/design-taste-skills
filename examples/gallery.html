@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Before / after · Design taste skills</title>
+  <script>
+    var shot = new URLSearchParams(location.search).get("shot");
+    if (shot) document.documentElement.dataset.shot = shot;
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #fffcf8;
+      --text: #1c1612;
+      --muted: #5e564e;
+      --line: #e4dcd2;
+      --line-strong: #8a7b6e;
+      --danger: #9c2b1a;
+      --font-display: "Newsreader", "Iowan Old Style", Palatino, Georgia, serif;
+      --font-ui: "Source Sans 3", "Segoe UI", sans-serif;
+      --font-slop: Inter, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { color-scheme: light; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 1.0625rem/1.5 var(--font-ui);
+    }
+    .wrap { width: min(100% - 2rem, 72rem); margin-inline: auto; padding-block: 3rem 4rem; }
+    .eyebrow, .panel figcaption, .label {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    h1, h2, .made h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.25rem); line-height: 1.02; margin: 0.4rem 0 1rem; max-width: 16ch; text-wrap: balance; }
+    .lede { max-width: 42rem; margin: 0; font-size: 1.125rem; }
+    .lede strong { font-weight: 600; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+    .pair { margin-top: 3.5rem; }
+    .pair h2 { font-size: 1.75rem; line-height: 1.15; margin: 0.35rem 0 1.25rem; }
+    .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: stretch; }
+    .panel { margin: 0; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+    .frame {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+    }
+    .frame > * { flex: 1; }
+    #hero .frame { min-height: 26rem; }
+    footer.site {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Habitual AI draft. Intentionally generic. Scoped so it cannot leak. */
+    .slop { font-family: var(--font-slop); color: white; }
+    .slop-hero {
+      background: linear-gradient(160deg, #4c1d95 0%, #6d28d9 55%, #7e22ce 100%);
+      padding: 2.25rem 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+    .slop-pill {
+      border: 1px solid rgb(255 255 255 / 40%);
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .slop h3 { margin: 0; font-family: var(--font-slop); font-size: 2rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
+    .slop p { margin: 0; color: rgb(255 255 255 / 80%); }
+    .slop-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+    .slop button, .made button, .made .text-link {
+      font: 600 0.95rem/1 var(--font-ui);
+      min-height: 40px;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+    .slop button { font-family: var(--font-slop); border-radius: 999px; border: 0; }
+    .slop .fill { background: white; color: #5b21b6; }
+    .slop .ghost { background: transparent; color: white; border: 1px solid white; }
+    .slop-features {
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      align-content: start;
+    }
+    .slop-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgb(15 23 42 / 8%);
+      padding: 1rem 0.8rem;
+      text-align: center;
+    }
+    .slop-card i {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: 0 auto 0.7rem;
+      border-radius: 999px;
+      color: white;
+      font-style: normal;
+      font-weight: 600;
+    }
+    .slop-card h3 { color: #0f172a; font-size: 1rem; }
+    .slop-card p { color: #6b7280; font-size: 0.85rem; margin-top: 0.35rem; }
+    .c1 { background: #7c3aed; } .c2 { background: #059669; } .c3 { background: #ea580c; }
+    .slop-dash {
+      background: #0f172a;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      justify-content: flex-start;
+    }
+    .slop-dash h3 { font-size: 1.35rem; text-align: left; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .stat {
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      min-height: 6.2rem;
+    }
+    .stat span { display: block; font-size: 0.75rem; opacity: 0.85; }
+    .stat strong { display: block; font-size: 1.7rem; margin-top: 0.4rem; }
+    .stat em { font-style: normal; color: #bbf7d0; font-size: 0.8rem; }
+    .s1 { background: linear-gradient(160deg, #6d28d9, #4f46e5); }
+    .s2 { background: linear-gradient(160deg, #0e7490, #2563eb); }
+    .s3 { background: linear-gradient(160deg, #047857, #0d9488); }
+    .s4 { background: linear-gradient(160deg, #be185d, #7c3aed); }
+
+    /* Designed version. */
+    .made { background: var(--bg); color: var(--text); padding: 1.5rem; display: flex; flex-direction: column; }
+    .made h3 { font-size: clamp(1.7rem, 2.4vw, 2.15rem); line-height: 1.05; margin: 0.45rem 0 0.75rem; text-wrap: balance; }
+    .made .quiet { color: var(--muted); margin: 0; }
+    .made-hero { justify-content: space-between; gap: 1.25rem; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-top: 1rem; }
+    .made .fill { background: var(--text); color: var(--bg); border: 1px solid var(--text); border-radius: 6px; }
+    .made .text-link { display: inline-flex; align-items: center; background: none; border: 0; padding-inline: 0.25rem; text-decoration: underline; text-underline-offset: 0.18em; color: var(--text); }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.15rem 0; margin: 0.9rem 0 0; font-size: 0.95rem; }
+    .meta span + span::before { content: "·"; margin: 0 0.5rem; }
+    .glazes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+    .glazes li { margin: 0; }
+    .swatch { display: block; aspect-ratio: 1; border: 1px solid rgb(28 22 18 / 12%); }
+    .glazes span { display: block; margin-top: 0.35rem; font-size: 0.85rem; text-align: center; }
+    .slip { background: #e4c99a; } .oxide { background: #8c3a2f; } .moss { background: #4f5d3b; } .ash { background: #c5beb2; }
+    .made-list { justify-content: flex-start; }
+    .made-list ul { list-style: none; margin: 0.5rem 0 0; padding: 0; }
+    .made-list li { padding: 0.85rem 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; }
+    .made-list li:last-child { border-bottom: 1px solid var(--line); }
+    .made-list strong { font-weight: 600; }
+    .made-queue header.bar { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .made-queue h3 { margin: 0; font-size: 1.75rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
+    th { text-align: left; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 0 0 0.4rem; }
+    td { padding: 0.55rem 0.75rem 0.55rem 0; border-top: 1px solid var(--line); vertical-align: baseline; }
+    td.num, th.num { text-align: right; padding-right: 0; }
+    .status { font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .status::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: currentColor; }
+    .status[data-state="past-due"] { color: var(--danger); }
+    .status[data-state="open"] { color: var(--muted); font-weight: 500; }
+
+    html[data-shot] .intro, html[data-shot] footer.site, html[data-shot] .pair { display: none; }
+    html[data-shot="hero"] #hero,
+    html[data-shot="capabilities"] #capabilities,
+    html[data-shot="queue"] #queue { display: block; }
+    html[data-shot] body .wrap { padding-block: 1.25rem; }
+
+    @media (max-width: 800px) {
+      .panels, .slop-features, .made-list li { grid-template-columns: 1fr; }
+      .frame, #hero .frame { min-height: 0; }
+      .meta { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+      .meta span + span::before { content: none; }
+      .slop-features { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="intro">
+      <p class="eyebrow">Design taste skills</p>
+      <h1>The same brief, two results.</h1>
+      <p class="lede">Atelier Maren is a <strong>fictional</strong> kiln in Portland that fires tile for architects. The left of each pair is the page a model produces when it has not made a decision. The right is the same brief, designed around the person specifying the tile. Do not reuse this palette on an unrelated product. The clay belongs to the kiln.</p>
+    </header>
+
+    <article class="pair" id="hero">
+      <p class="label">First screen · split</p>
+      <h2>What the architect should notice</h2>
+      <div class="panels">
+        <figure class="panel">
+          <figcaption>Before · habit</figcaption>
+          <div class="frame">
+            <div class="slop slop-hero">
+              <span class="slop-pill">AI-powered studio</span>
+              <h3>Elevate your interiors</h3>
+              <p>Seamless. Beautiful. Timeless.</p>
+              <div class="slop-actions">
+                <button type="button" class="fill">Get Started</button>
+                <button type="button" class="ghost">Learn More</button>
+              </div>
+            </div>
+          </div>
+        </figure>
+        <figure class="panel">
+          <figcaption>After · designed</figcaption>
+          <div class="frame">
+            <div class="made made-hero">
+              <div>
+                <p class="eyebrow">Atelier Maren · Portland</p>
+                <h3>Tile fired in small batches for rooms that should still look right in twenty years.</h3>
+                <p class="quiet">Four glazes, a standard module, and a written lead time before you specify.</p>
+                <div class="row">
+                  <button type="button" class="fill">Request a firing</button>
+                  <button type="button" class="text-link">See current work</button>
+                </div>
+                <p class="meta"><span>18-week lead time</span><span>4 standard glazes</span><span>Portland kiln</span></p>
+              </div>
+              <ul class="glazes">
+                <li><i class="swatch slip"></i><span>Slip</span></li>
+                <li><i class="swatch oxide"></i><span>Oxide</span></li>
+                <li><i class="swatch moss"></i><span>Moss</span></li>
+                <li><i class="swatch ash"></i><span>Ash</span></li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </article>
+
+    <article class="pair" id="capabilities">
+      <p class="label">Section · constraints, not adjectives</p>
+      <h2>What you can actually specify</h2>
+      <div class="panels">
+        <figure class="panel">
+          <figcaption>Before · habit</figcaption>
+          <div class="frame">
+            <div class="slop slop-features">
+              <article class="slop-card">
+                <i class="c1">⚡</i>
+                <h3>Fast</h3>
+                <p>Lightning-quick turnarounds that keep your projects moving.</p>
+              </article>
+              <article class="slop-card">
+                <i class="c2">🌿</i>
+                <h3>Sustainable</h3>
+                <p>Eco-friendly materials for a better tomorrow.</p>
+              </article>
+              <article class="slop-card">
+                <i class="c3">✦</i>
+                <h3>Premium</h3>
+                <p>Crafted to elevate every space you imagine.</p>
+              </article>
+            </div>
+          </div>
+        </figure>
+        <figure class="panel">
+          <figcaption>After · designed</figcaption>
+          <div class="frame">
+            <div class="made made-list">
+              <p class="eyebrow">Constraints</p>
+              <h3>Said before you draw the joint.</h3>
+              <ul>
+                <li><strong>Lead time</strong><span>18 weeks, written down before you specify.</span></li>
+                <li><strong>Glazes</strong><span>Slip, Oxide, Moss, Ash. Mixed in the Portland kiln.</span></li>
+                <li><strong>Minimum</strong><span>40 modules. Smaller runs wait for a shared firing.</span></li>
+                <li><strong>Refused</strong><span>Paint-chip matching. The glaze is the color.</span></li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </article>
+
+    <article class="pair" id="queue">
+      <p class="label">App · a queue, not a poster</p>
+      <h2>What the studio does on Monday</h2>
+      <div class="panels">
+        <figure class="panel">
+          <figcaption>Before · habit</figcaption>
+          <div class="frame">
+            <div class="slop slop-dash">
+              <h3>Welcome back, Alex 👋</h3>
+              <div class="stats">
+                <div class="stat s1"><span>Orders</span><strong>128</strong><em>▲ 12%</em></div>
+                <div class="stat s2"><span>Revenue</span><strong>$48k</strong><em>▲ 8%</em></div>
+                <div class="stat s3"><span>Growth</span><strong>3.2×</strong><em>▲ 1.1</em></div>
+                <div class="stat s4"><span>Satisfaction</span><strong>98</strong><em>▲ 2 pts</em></div>
+              </div>
+            </div>
+          </div>
+        </figure>
+        <figure class="panel">
+          <figcaption>After · designed</figcaption>
+          <div class="frame">
+            <div class="made made-queue">
+              <header class="bar">
+                <h3>Orders</h3>
+                <button type="button" class="fill">New order</button>
+              </header>
+              <p class="quiet">14 open · 3 past due · due this week</p>
+              <table>
+                <thead>
+                  <tr><th>Order</th><th>Architect</th><th>Due</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>KM-214</td><td>Hart &amp; Field</td><td>Mar 12</td><td><span class="status" data-state="past-due">Past due</span></td></tr>
+                  <tr><td>KM-208</td><td>Soto Studio</td><td>Mar 18</td><td><span class="status" data-state="past-due">Past due</span></td></tr>
+                  <tr><td>KM-221</td><td>Lin Architects</td><td>Apr 2</td><td><span class="status" data-state="open">Open</span></td></tr>
+                  <tr><td>KM-225</td><td>North Room</td><td>Apr 9</td><td><span class="status" data-state="open">Open</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </article>
+
+    <footer class="site">
+      <p>A specimen for the design-taste-skills collection. Fictional studio, fictional orders. Read the decisions in <a href="before-after.md">before-after.md</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>
